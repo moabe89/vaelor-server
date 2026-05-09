@@ -1,6 +1,6 @@
 name: vaelor
-# Versao deploy VPS — login server desativado por enquanto (porta 80/8080 ocupadas pelo Traefik/evolution-api)
-# Sera ativado depois com labels Traefik para rotear funnyotserv.com.br
+# Login server na porta 8081 (host) -> 80 (container interno)
+# Traefik usa 80/443 e evolution-api usa 8080, entao 8081 esta livre.
 services:
   database:
     image: mariadb:latest
@@ -10,7 +10,6 @@ services:
       MYSQL_USER: ${MYSQL_USER:-canary}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:?obrigatorio - veja .env.example}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?obrigatorio - veja .env.example}
-    # Banco SO escuta na rede interna do Docker (NAO exposto na internet)
     expose:
       - "3306"
     volumes:
@@ -21,6 +20,27 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+
+  login:
+    image: opentibiabr/login-server:latest
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      MYSQL_HOST: database
+      MYSQL_PORT: 3306
+      MYSQL_DBNAME: ${MYSQL_DATABASE:-canary}
+      MYSQL_USER: ${MYSQL_USER:-canary}
+      MYSQL_PASS: ${MYSQL_PASSWORD:?obrigatorio - veja .env.example}
+      SERVER_NAME: ${SERVER_NAME:-Vaelor}
+      SERVER_IP: ${SERVER_IP:-31.97.151.29}
+      SERVER_PORT: ${SERVER_PORT:-7172}
+      SERVER_LOCATION: ${SERVER_LOCATION:-BRA}
+      LOGIN_HTTP_PORT: 80
+      LOGIN_GRPC_PORT: 9090
+    depends_on:
+      database:
+        condition: service_healthy
 
   server:
     build:
@@ -38,38 +58,6 @@ services:
     depends_on:
       database:
         condition: service_healthy
-
-  # =============================================================================
-  # LOGIN SERVER (HTTP) — DESATIVADO TEMPORARIAMENTE
-  # =============================================================================
-  # Sera reativado depois que configurarmos labels Traefik para rotear
-  # funnyotserv.com.br -> este container na porta 80 (interna).
-  #
-  # login:
-  #   image: opentibiabr/login-server:latest
-  #   restart: unless-stopped
-  #   environment:
-  #     MYSQL_HOST: database
-  #     MYSQL_PORT: 3306
-  #     MYSQL_DBNAME: ${MYSQL_DATABASE:-canary}
-  #     MYSQL_USER: ${MYSQL_USER:-canary}
-  #     MYSQL_PASS: ${MYSQL_PASSWORD:?obrigatorio - veja .env.example}
-  #     SERVER_NAME: ${SERVER_NAME:-Vaelor}
-  #     SERVER_IP: ${SERVER_IP:-funnyotserv.com.br}
-  #     SERVER_PORT: ${SERVER_PORT:-7172}
-  #     SERVER_LOCATION: ${SERVER_LOCATION:-BRA}
-  #     LOGIN_HTTP_PORT: 80
-  #     LOGIN_GRPC_PORT: 9090
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.vaelor-login.rule=Host(`funnyotserv.com.br`)"
-  #     - "traefik.http.routers.vaelor-login.entrypoints=websecure"
-  #     - "traefik.http.routers.vaelor-login.tls=true"
-  #     - "traefik.http.routers.vaelor-login.tls.certresolver=letsencrypt"
-  #     - "traefik.http.services.vaelor-login.loadbalancer.server.port=80"
-  #   depends_on:
-  #     database:
-  #       condition: service_healthy
 
 volumes:
   db-data:
