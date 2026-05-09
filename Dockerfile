@@ -52,7 +52,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Sao_Paulo
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    mariadb-client curl tzdata \
+    mariadb-client curl ca-certificates tzdata \
     && ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime \
     && echo "${TZ}" > /etc/timezone \
     && rm -rf /var/lib/apt/lists/*
