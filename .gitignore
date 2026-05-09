@@ -1,0 +1,58 @@
+# Vaelor — Raiz do Servidor
+
+# Pastas Pesadas (NÃO enviar para a VPS / GitHub)
+cliente_4.0/
+cliente_1524/
+vcpkg/
+Outros docs/
+*.zip
+*.rar
+*.dmg
+*.app
+.DS_Store
+
+# Ignorar pastas de compilação dentro do servidor Canary
+canary/build/
+canary/.vs/
+canary/out/
+canary/vcproj/
+canary/*.sln
+canary/*.vcxproj
+canary/*.user
+canary/canary
+canary/canary.old
+
+# Binários dentro do Canary (compilados localmente, não vão para VPS)
+canary/*.exe
+canary/*.dll
+canary/vcpkg_installed/
+canary/Debug/
+canary/.git/
+canary/.github/
+
+# Ignorar arquivos de log
+*.log
+canary/*.log
+
+# Banco de dados (exportado separadamente)
+*.sql
+
+# Arquivos de Sistema e IDE
+.vscode/
+.idea/
+.claude/
+.gemini/
+memory/
+.mcp.json
+
+# Credenciais e Senhas (Segurança)
+.env
+.env.local
+*.key
+*.pem
+
+# Mapas .otbm (muito grandes para o GitHub, Canary baixa automaticamente)
+canary/data-otservbr-global/world/*.otbm
+
+# Script do Inno Setup (não precisa ir pro server)
+*.iss
