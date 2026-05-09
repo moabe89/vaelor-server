@@ -10,10 +10,10 @@ Seu cliente humano é **Moabe** — advogado (não-programador) que está constr
 
 Manter, depurar e estender o servidor Vaelor em **4 frentes** (em ordem de prioridade decidida por Moabe em 2026-05-08):
 
-1. **🔴 PRIORIDADE 1 — Destravar o OT localmente** (Fases 2/3/6 do roadmap parciais — cliente não conecta)
+1. **🔴 PRIORIDADE 1 — Deploy Online na VPS** (Fases 7-8 — VPS, Banco e Domínio)
 2. **🟡 PRIORIDADE 2 — Customização Sandbox** (Fase 4: rates altas + itens infinitos + scripts conveniência)
-3. **🟡 PRIORIDADE 3 — AAC web + Deploy VPS Online** (Fases 7-8)
-4. **🟢 PRIORIDADE 4 — Mapa custom Vaelor via RME** (Fase 5)
+3. **🟡 PRIORIDADE 3 — Mapa custom Vaelor via RME** (Fase 5)
+4. **🟢 PRIORIDADE 4 — Manutenção e Novos Conteúdos** (Fases posteriores)
 
 ## STACK CONFIRMADA
 
@@ -26,15 +26,15 @@ Manter, depurar e estender o servidor Vaelor em **4 frentes** (em ordem de prior
 | **Assets** | Tibia Global 15.24 (extraídos de `%LocalAppData%\Tibia\packages\Tibia\assets`) | `cliente_1524\data\things\1500\` |
 | **Linguagem scripts** | LuaJIT (servidor) + Lua (cliente) | `canary/data/scripts/` + `cliente_1524/modules/` |
 
-## ESTADO ATUAL (snapshot 2026-05-08, lido pelo agent-architect)
+## ESTADO ATUAL (snapshot 2026-05-09)
 
-- ✅ Canary compilado com sucesso (`canary.exe` existe)
-- ✅ OTClient extraído com source code completo (modules, mods, src)
-- ✅ Pasta `data/things/1500/` populada com `Tibia.dat` (4.85MB), `Tibia.spr` (cópia binária do dat), `catalog.json` e `assets/`
-- ❌ **BLOQUEIO ATIVO**: cliente reporta "1524 recognized as an installed client, but not supported" e cascata de erros Lua em `client_entergame/entergame.lua:116` (`attempt to compare number with nil`).
-- 🔍 **Causa hipotética**: `setup.otml` declara `last-supported-version: 1511`. Os assets são 15.24. Versão 1524 fica fora do range suportado pelo Mehah Redemption 4.x atual → label fica `nil` → cascata em `updateLabelText()` e `doLogin()`.
+- ✅ **Servidor Versionado:** GitHub Repo `moabe89/vaelor-server` pronto com Dockerfile.
+- ✅ **Configuração Online:** `config.lua` e `init.lua` (cliente) apontando para `funnyotserv.com.br`.
+- ✅ **Banco de Dados:** Dump `vaelor_db.sql` pronto para subir na VPS.
+- ✅ **Minimap:** Mapa revelado e marcadores integrados no `cliente_4.0\data\minimap`.
+- ❌ **BLOQUEIO ATIVO:** Nenhum. O trabalho agora é de infraestrutura (configurar Easypanel na VPS).
 
-Detalhes: `docs/DIAGNOSTICO_INICIAL.md` e `docs/CHECKLIST_OURO.md`.
+Detalhes: `docs/STATUS.md` e `walkthrough.md`.
 
 ## SUB-AGENTES ESPECIALIZADOS
 
