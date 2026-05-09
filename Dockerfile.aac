@@ -1,9 +1,7 @@
-# Dockerfile do myAAC (Automatic Account Creator) para o Vaelor
 FROM php:8.2-apache
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Instala extensoes PHP que o myAAC precisa
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev libpng-dev libjpeg-dev libfreetype6-dev libicu-dev \
     libxml2-dev libonig-dev unzip \
@@ -12,10 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         mysqli pdo pdo_mysql gd zip intl mbstring xml \
     && rm -rf /var/lib/apt/lists/*
 
-# Habilitar mod_rewrite (myAAC usa URL rewriting)
 RUN a2enmod rewrite headers
 
-# Configurar PHP para producao
 RUN { \
     echo 'memory_limit = 256M'; \
     echo 'post_max_size = 32M'; \
@@ -24,7 +20,6 @@ RUN { \
     echo 'date.timezone = America/Sao_Paulo'; \
 } > /usr/local/etc/php/conf.d/myaac.ini
 
-# Permitir .htaccess override
 RUN { \
     echo '<Directory /var/www/html>'; \
     echo '  AllowOverride All'; \
@@ -33,13 +28,17 @@ RUN { \
 } > /etc/apache2/conf-available/myaac.conf \
     && a2enconf myaac
 
-# Copiar arquivos do myAAC
 COPY aac/ /var/www/html/
 
-# Permissoes
+# Permissoes para cache (que o myAAC precisa escrever)
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+    && chmod -R 755 /var/www/html \
+    && mkdir -p /var/www/html/system/cache/twig \
+    && chmod -R 777 /var/www/html/system/cache
+
+# Entrypoint que gera config.lua dinamicamente das env vars
+COPY aac/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 80
-
-# Apache vai rodar como entrypoint default da imagem php:8.2-apache
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
