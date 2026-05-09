@@ -4,15 +4,17 @@ services:
     image: mariadb:latest
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: canary
-      MYSQL_USER: canary
-      MYSQL_PASSWORD: vaelor2026
-      MYSQL_ROOT_PASSWORD: vaelorRoot2026
-    ports:
-      - "3306:3306"
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-canary}
+      MYSQL_USER: ${MYSQL_USER:-canary}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?obrigatorio - veja .env.example}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?obrigatorio - veja .env.example}
+    # Banco SO escuta na rede interna do Docker (NAO exposto na internet)
+    # Se precisar acessar via phpMyAdmin externo, usar tunel SSH ou VPN
+    expose:
+      - "3306"
     volumes:
       - db-data:/var/lib/mysql
-      - ./canary/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./canary/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect"]
       interval: 10s
@@ -22,18 +24,20 @@ services:
   login:
     image: opentibiabr/login-server:latest
     restart: unless-stopped
+    # Login HTTP — porta interna 80, mapeada para 8080 no host
+    # (Easypanel/nginx-proxy faz roteamento de funnyotserv.com.br -> 8080)
     ports:
-      - "80:80"
+      - "8080:80"
     environment:
       MYSQL_HOST: database
       MYSQL_PORT: 3306
-      MYSQL_DBNAME: canary
-      MYSQL_USER: canary
-      MYSQL_PASS: vaelor2026
-      SERVER_NAME: Vaelor
-      SERVER_IP: funnyotserv.com.br
-      SERVER_PORT: 7172
-      SERVER_LOCATION: BRA
+      MYSQL_DBNAME: ${MYSQL_DATABASE:-canary}
+      MYSQL_USER: ${MYSQL_USER:-canary}
+      MYSQL_PASS: ${MYSQL_PASSWORD:?obrigatorio - veja .env.example}
+      SERVER_NAME: ${SERVER_NAME:-Vaelor}
+      SERVER_IP: ${SERVER_IP:-funnyotserv.com.br}
+      SERVER_PORT: ${SERVER_PORT:-7172}
+      SERVER_LOCATION: ${SERVER_LOCATION:-BRA}
       LOGIN_HTTP_PORT: 80
       LOGIN_GRPC_PORT: 9090
     depends_on:
@@ -47,9 +51,9 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_HOST: database
-      MYSQL_USER: canary
-      MYSQL_PASSWORD: vaelor2026
-      MYSQL_DATABASE: canary
+      MYSQL_USER: ${MYSQL_USER:-canary}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?obrigatorio - veja .env.example}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-canary}
     ports:
       - "7171:7171"
       - "7172:7172"

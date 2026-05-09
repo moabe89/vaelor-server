@@ -34,8 +34,10 @@ canary/.github/
 *.log
 canary/*.log
 
-# Banco de dados (exportado separadamente)
+# Banco de dados (dump completo do MariaDB NÃO vai pro repo — exportado separadamente)
 *.sql
+# EXCEÇÃO: schema base do canary (necessário pelo Dockerfile e docker-compose)
+!canary/schema.sql
 
 # Arquivos de Sistema e IDE
 .vscode/
@@ -50,8 +52,10 @@ memory/
 .env.local
 *.key
 *.pem
+# EXCEÇÃO: chave RSA do canary (necessária para o servidor iniciar — repo é PRIVADO)
+!canary/key.pem
 
-# Mapas .otbm (muito grandes para o GitHub, Canary baixa automaticamente)
+# Mapas .otbm (muito grandes para o GitHub, Canary baixa automaticamente do release)
 canary/data-otservbr-global/world/*.otbm
 
 # Script do Inno Setup (não precisa ir pro server)
