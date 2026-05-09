@@ -1,35 +1,33 @@
-# dev-otserv-vaelor — Índice universal de agentes
+# Vaelor — Indice de Agentes
 
-> Este é o índice **universal** que clients agnósticos podem ler. Os arquivos canônicos com instruções completas são `CLAUDE.md` (Claude Code) e `GEMINI.md` (Antigravity). Conteúdo idêntico nos dois.
+Este arquivo e o indice universal lido por agentes que nao distinguem entre CLAUDE.md/GEMINI.md.
 
-## Projeto
+## Documentos chave
 
-**Vaelor** — OTServer Tibia 15.x rodando Canary + OTClient Mehah DX11. Modo sandbox/solo.
+| Arquivo | Quando ler |
+|---|---|
+| `CLAUDE.md` | Claude Code (Anthropic) — agente principal |
+| `GEMINI.md` | Antigravity (Google) — agente espelho |
+| `docs/STATUS.md` | SEMPRE leia primeiro |
+| `docs/CONTINUACAO_MAC.md` | Se rodando no Mac do Moabe |
+| `walkthrough.md` | Deploy passo-a-passo |
+| `docs/CHECKLIST_OURO.md` | Pre-flight checks antes de login |
+| `docs/DIAGNOSTICO_INICIAL.md` | Historico de problema inicial (cliente nao abria) |
 
-## Ferramentas suportadas
+## Sub-agentes especializados
 
-| Cliente | Arquivo de instruções | Pasta de configuração |
-|---|---|---|
-| Claude Code (Anthropic) | `CLAUDE.md` | `.claude/` |
-| Antigravity (Google Gemini) | `GEMINI.md` | `.gemini/` |
+- `canary-cpp-builder` — Compilacao C++ do canary
+- `otclient-mehah-modder` — Cliente OTClient (assets, Lua, modules)
+- `lua-game-scripter` — Scripts gameplay (spells, NPCs, eventos)
 
-## Sub-agentes
+## Skills disponiveis
 
-- `canary-cpp-builder` — compilação C++ + debug
-- `otclient-mehah-modder` — cliente Mehah + assets
-- `lua-game-scripter` — scripts gameplay
+- `compile-canary-windows` — Recompilar Canary do zero
+- `compile-otclient-mehah` — Recompilar OTClient
+- `diagnose-otclient-startup` — Analisar otclient.log
+- `import-tibia-global-assets` — Importar assets Tibia oficial
 
-## Skills críticas
+## Estado: 2026-05-09
 
-- `diagnose-otclient-startup`
-- `import-tibia-global-assets`
-- `compile-canary-windows`
-- `compile-otclient-mehah`
-
-## Para começar
-
-Ver `docs/PRIMEIRO_CONTATO.md` para o prompt inicial.
-
-## Estado atual
-
-Ver `docs/STATUS.md`.
+Sessao no Windows pausada com myAAC dando HTTP 500. Moabe migrando para Mac.
+Veja `docs/STATUS.md` e `docs/CONTINUACAO_MAC.md`.
