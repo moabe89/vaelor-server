@@ -1,5 +1,6 @@
 name: vaelor
-# Login server na porta 8081 (host) -> 80 (container interno)
+# myAAC + canary + MariaDB
+# myAAC roda na porta 8081 (host) -> 80 (container) — endpoint login.php
 # Traefik usa 80/443 e evolution-api usa 8080, entao 8081 esta livre.
 services:
   database:
@@ -21,23 +22,16 @@ services:
       timeout: 5s
       retries: 10
 
-  login:
-    image: opentibiabr/login-server:latest
+  aac:
+    build:
+      context: .
+      dockerfile: Dockerfile.aac
     restart: unless-stopped
     ports:
       - "8081:80"
-    environment:
-      MYSQL_HOST: database
-      MYSQL_PORT: 3306
-      MYSQL_DBNAME: ${MYSQL_DATABASE:-canary}
-      MYSQL_USER: ${MYSQL_USER:-canary}
-      MYSQL_PASS: ${MYSQL_PASSWORD:?obrigatorio - veja .env.example}
-      SERVER_NAME: ${SERVER_NAME:-Vaelor}
-      SERVER_IP: ${SERVER_IP:-31.97.151.29}
-      SERVER_PORT: ${SERVER_PORT:-7172}
-      SERVER_LOCATION: ${SERVER_LOCATION:-BRA}
-      LOGIN_HTTP_PORT: 80
-      LOGIN_GRPC_PORT: 9090
+    volumes:
+      # myAAC precisa ler config.lua do canary (mesmo arquivo, modo so leitura)
+      - ./canary/config.lua:/canary/config.lua:ro
     depends_on:
       database:
         condition: service_healthy

@@ -60,3 +60,10 @@ canary/data-otservbr-global/world/*.otbm
 
 # Script do Inno Setup (não precisa ir pro server)
 *.iss
+
+# myAAC - excluir cache, node_modules e logs (geram em runtime)
+aac/system/cache/
+aac/node_modules/
+aac/.idea/
+aac/error.log
+aac/install.lock
