@@ -28,8 +28,8 @@ parallelism = 2
 -- Auth
 authType = "password"
 
--- Server
-ip = "0.0.0.0"
+-- Server (IP que o cliente vai usar para conectar no game port 7172)
+ip = "${SERVER_IP:-31.97.151.29}"
 loginProtocolPort = 7171
 gameProtocolPort = 7172
 statusProtocolPort = 7171

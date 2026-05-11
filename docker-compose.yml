@@ -33,6 +33,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-canary}
       SERVER_NAME: ${SERVER_NAME:-Vaelor}
       SERVER_URL: http://31.97.151.29:8081/
+      SERVER_IP: ${SERVER_IP:-31.97.151.29}
     depends_on:
       database:
         condition: service_healthy
