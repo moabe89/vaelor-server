@@ -1,7 +1,10 @@
-# Vaelor — Raiz do Servidor
+# FunnyOt (antes Vaelor) — Raiz do Servidor
 
 # Pastas Pesadas (NÃO enviar para a VPS / GitHub)
 cliente_4.0/
+cliente_4.0_old/
+cliente_5.0/
+cliente_5.0_dist/
 cliente_1524/
 vcpkg/
 Outros docs/
@@ -10,6 +13,24 @@ Outros docs/
 *.dmg
 *.app
 .DS_Store
+
+# Build artifacts do empacotamento
+FunnyOt-Setup.exe
+FunnyOt-Client.zip
+Vaelor-*.exe
+Vaelor-*.zip
+
+# Pastas e arquivos baixados temporariamente
+_otclient_new/
+_otclient_gl/
+_otclient_src/
+_*.ps1
+_*.json
+_*.bin
+ot_*.json
+ot_*.bin
+*.bin
+cacheinfo_response*
 
 # Ignorar pastas de compilação dentro do servidor Canary
 canary/build/

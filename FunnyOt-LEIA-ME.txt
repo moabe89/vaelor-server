@@ -1,0 +1,97 @@
+==============================================
+  FUNNYOT - SERVIDOR PRIVADO DE TIBIA
+  Instrucoes para jogadores
+==============================================
+
+> O QUE E O FUNNYOT?
+
+FunnyOt e um servidor privado de Tibia (Open Tibia Server) com protocolo
+15.x (Tibia moderno), rodando engine Canary OpenTibiaBR. O mapa e
+otservbr-global aberto.
+
+
+> COMO BAIXAR E INSTALAR
+
+Voce tem 2 opcoes - escolha UMA:
+
+
+[ OPCAO 1 ] Instalador FunnyOt-Setup.exe (RECOMENDADO)
+------------------------------------------------------
+
+1. Baixe FunnyOt-Setup.exe (~148 MB)
+2. Clique 2x no arquivo baixado
+3. O Windows pode mostrar "Windows protegeu o seu PC" -- clique em
+   "Mais informacoes" depois "Executar assim mesmo" (e seguro, somos
+   um servidor pessoal nao certificado)
+4. Siga o assistente de instalacao:
+   - Aceite o local sugerido (ou mude se quiser)
+   - Marque "criar atalho na area de trabalho" se quiser
+   - Clique em Instalar
+5. Pronto! Clique no atalho "FunnyOt" na area de trabalho
+
+
+[ OPCAO 2 ] Pasta ZIP FunnyOt-Client.zip
+------------------------------------------------------
+
+1. Baixe FunnyOt-Client.zip (~160 MB)
+2. Clique direito no arquivo > "Extrair tudo..."
+3. Escolha onde extrair (ex: Documentos\FunnyOt)
+4. Entre na pasta extraida
+5. Execute otclient.exe
+
+
+> DIRECTX vs OPENGL
+
+O cliente vem em duas versoes na mesma instalacao:
+
+* otclient.exe - DirectX (RECOMENDADO para Windows). Performance melhor.
+* otclient_opengl.exe - OpenGL (alternativa). Use se o DirectX tiver
+  problemas graficos ou em PCs antigos.
+
+
+> COMO JOGAR
+
+1. Abra o cliente FunnyOt (atalho ou otclient.exe)
+2. Na tela de login:
+   - Conta: <crie sua conta no site - veja abaixo>
+   - Senha: <sua senha>
+3. Clique em Entrar
+4. Escolha um personagem
+5. Bom jogo!
+
+
+> COMO CRIAR UMA CONTA
+
+Acesse pelo navegador: http://31.97.151.29:8081/
+
+Va em "Create Account" / "Criar Conta" e preencha os dados.
+
+
+> PROBLEMAS COMUNS
+
+* Demorou para abrir na 1a vez: na primeira execucao o cliente gera o
+  minimap completo do mapa (1069 imagens). Aguarde 10-30 segundos.
+
+* "Unknown error" ao logar: verifique se digitou conta/senha certo.
+  Se esqueceu a senha pode recuperar no site http://31.97.151.29:8081/
+
+* O cliente nao abre / tela preta: tente o atalho da versao OpenGL
+  (precisa ter sido marcada na instalacao).
+
+* Verifique seu Windows: precisa ser Windows 10 ou 11, 64 bits.
+
+
+> REQUISITOS MINIMOS
+
+- Windows 10 ou 11 (64 bits)
+- 250 MB de espaco em disco
+- Conexao com Internet
+
+
+> SUPORTE
+
+Em caso de problema, fale com Moabe (admin do servidor).
+
+==============================================
+  Versao 1.1.0 - Maio 2026
+==============================================
