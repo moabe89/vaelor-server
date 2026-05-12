@@ -1,0 +1,416 @@
+/* FunnyOt Template — CSS customizado complementar ao Tailwind CDN */
+
+:root {
+  --gold-bright: #e8c875;
+  --gold-mid: #c7983f;
+  --gold-dark: #8a601c;
+  --gold-glow: #fcebbb;
+  --dark-panel: #0b111a;
+  --dark-panel-grad: #111a26;
+  --dark-bg: #0f111a;
+  --border-bronze: #7a5c29;
+  --plaque-blue: #142642;
+  --plaque-blue-mid: #0a182b;
+  --plaque-blue-dark: #050f1c;
+  --plaque-green: #194220;
+  --plaque-green-mid: #0d2a13;
+  --plaque-green-dark: #041207;
+}
+
+/* Body com background fixo */
+body {
+  background-color: var(--dark-bg);
+  background-image: url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=2000&auto=format&fit=crop");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #e2e8f0;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.font-display { font-family: 'Cinzel', Georgia, serif; }
+.font-sans { font-family: 'Inter', system-ui, sans-serif; }
+
+/* === PANEIS PREMIUM === */
+.panel-premium {
+  background-color: var(--dark-panel);
+  background-image: radial-gradient(circle at center, var(--dark-panel-grad) 0%, #070a10 100%);
+  border: 1px solid var(--border-bronze);
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(0,0,0,0.8);
+  position: relative;
+}
+
+.panel-premium-box {
+  background-color: var(--dark-panel);
+  background-image: radial-gradient(circle at center, var(--dark-panel-grad) 0%, #070a10 100%);
+  border: 1px solid var(--border-bronze);
+  border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(0,0,0,0.8);
+  position: relative;
+}
+
+.panel-premium-box::after, .panel-premium::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: inherit;
+}
+
+/* === BACKGROUND PARCHMENT (para news) === */
+.bg-parchment {
+  background-color: #e5d1a5;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(0,0,0,0.05) 100%),
+    url("https://www.transparenttextures.com/patterns/aged-paper.png");
+  color: #3b2818;
+}
+
+/* === BOTOES PREMIUM === */
+.premium-button {
+  background: linear-gradient(180deg, #1f3a61 0%, #0a172b 100%);
+  border: 1px solid #d4af37;
+  border-radius: 4px;
+  color: #fdf3d7;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.15em;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 6px rgba(0,0,0,0.6);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.premium-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 50%);
+  pointer-events: none;
+}
+.premium-button:hover {
+  background: linear-gradient(180deg, #2a4c7a 0%, #0d1e38 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 6px 12px rgba(0,0,0,0.7);
+  color: #ffffff;
+  border-color: #f0cc5e;
+}
+.premium-button:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+}
+
+.premium-button-green {
+  background: linear-gradient(180deg, #1b6633 0%, #0b2e15 100%);
+  border-color: #8fca51;
+}
+.premium-button-green:hover {
+  background: linear-gradient(180deg, #228241 0%, #0e3d1c 100%);
+  border-color: #a4e65c;
+}
+
+.rpg-border-inner {
+  border: 1px solid #573e1c;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3);
+}
+
+/* === PLAQUE HEADER (cabeçalho dourado celta) === */
+.plaque {
+  position: relative;
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #e8c875, #c7983f 50%, #8a601c);
+  border-radius: 2px;
+  box-shadow: 0 4px 15px rgba(0,0,0,1);
+  transition: transform 0.3s;
+  border: none;
+  padding: 0;
+  outline: none;
+}
+.plaque:hover {
+  transform: scale(1.01);
+}
+.plaque.expanded {
+  transform: scale(1.02);
+}
+
+/* área interior escura azul */
+.plaque-inner {
+  position: absolute;
+  inset: 2px;
+  background: linear-gradient(to bottom, var(--plaque-blue), var(--plaque-blue-mid), var(--plaque-blue-dark));
+  border-radius: 1px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+  overflow: hidden;
+}
+.plaque-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+}
+
+.plaque.green .plaque-inner {
+  background: linear-gradient(to bottom, var(--plaque-green), var(--plaque-green-mid), var(--plaque-green-dark));
+}
+
+/* linhas internas douradas */
+.plaque-frame-1 {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid #dca431;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.plaque-frame-2 {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #e8c875;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* nós celtas nos cantos */
+.plaque-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: var(--plaque-blue);
+  border: 1.5px solid #e8c875;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform 0.7s;
+}
+.plaque.green .plaque-corner { background: var(--plaque-green); }
+.plaque .plaque-corner.tl { top: -4px; left: -4px; }
+.plaque .plaque-corner.tr { top: -4px; right: -4px; }
+.plaque .plaque-corner.bl { bottom: -4px; left: -4px; background: var(--plaque-blue-mid); border-color: #ab7b28; }
+.plaque .plaque-corner.br { bottom: -4px; right: -4px; background: var(--plaque-blue-mid); border-color: #ab7b28; }
+.plaque.green .plaque-corner.bl,
+.plaque.green .plaque-corner.br { background: var(--plaque-green-mid); }
+.plaque:hover .plaque-corner { transform: rotate(90deg); }
+.plaque.expanded .plaque-corner { transform: rotate(135deg) scale(1.1); }
+
+.plaque-corner::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1px solid #dca431;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+.plaque-corner::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fcebbb;
+  box-shadow: 0 0 6px #fcebbb;
+  border: 1px solid #a07122;
+}
+
+/* barras centrais douradas */
+.plaque-bar-top, .plaque-bar-bottom {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 5px;
+  z-index: 10;
+  border-radius: 1px;
+}
+.plaque-bar-top {
+  top: -2px;
+  background: linear-gradient(to right, #e8c875, #fcebbb, #e8c875);
+  border: 1px solid #8a601c;
+}
+.plaque-bar-bottom {
+  bottom: -2px;
+  background: linear-gradient(to right, #ab7b28, #e8c875, #ab7b28);
+  border: 1px solid #5a3a0e;
+}
+
+/* texto do plaque */
+.plaque-text {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  padding: 0.75rem 1.75rem;
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  color: #fdf6e3;
+  letter-spacing: 0.15em;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 3px rgba(0,0,0,1);
+}
+
+/* === COLLAPSIBLE PANEL CONTAINER === */
+.collapsible-panel {
+  margin-bottom: 24px;
+}
+
+.collapsible-content {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: -6px;
+  transition: grid-template-rows 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.collapsible-content.collapsed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  margin-top: 0;
+}
+.collapsible-content > .collapsible-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.collapsible-content .panel-body {
+  padding: 1.5rem 0.75rem 0.75rem;
+  border-top: 0;
+  background: rgba(11, 17, 26, 0.95);
+  border-radius: 0 0 0.375rem 0.375rem;
+  box-shadow: inset 0 5px 15px rgba(0,0,0,0.8);
+  border-left: 1px solid var(--border-bronze);
+  border-right: 1px solid var(--border-bronze);
+  border-bottom: 1px solid var(--border-bronze);
+  backdrop-filter: blur(2px);
+}
+
+/* === MENU LINKS NA SIDEBAR === */
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: #b6c2d1;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  transition: all 0.15s;
+}
+.menu-link:last-child { border-bottom: 0; }
+.menu-link:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fcd34d;
+}
+.menu-link .marker {
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  background: #785434;
+  margin-right: 0.75rem;
+  display: inline-block;
+  transition: background 0.15s;
+}
+.menu-link:hover .marker { background: #fbbf24; }
+
+/* === TITULO PRINCIPAL FUNNYOT === */
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  background: linear-gradient(to bottom, #fde68a, #f59e0b, #b45309);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,1));
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-subtitle {
+  color: #fde68a;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  border-top: 1px solid rgba(180,131,9, 0.5);
+  text-shadow: 0 2px 2px rgba(0,0,0,0.8);
+}
+
+/* === NEWS HEADER === */
+.news-banner {
+  background: linear-gradient(to right, #591d1d, #7d2020, #591d1d);
+  border-bottom: 1px solid #3b0b0b;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  padding: 0.75rem 1.25rem;
+  color: #fde68a;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+}
+
+.news-drop-cap::first-letter {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: 4em;
+  float: left;
+  line-height: 0.8;
+  margin: 0.1em 0.15em 0 0;
+  color: #6b1414;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
+/* === SERVER STATUS PULSE === */
+.status-online-pulse {
+  position: relative;
+  display: inline-flex;
+  width: 12px;
+  height: 12px;
+}
+.status-online-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #4ade80;
+  opacity: 0.75;
+  animation: ping 1.5s cubic-bezier(0,0,0.2,1) infinite;
+}
+.status-online-pulse::after {
+  content: '';
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+@keyframes ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+/* === DOT NEWS TICKER === */
+.news-ticker-dot {
+  color: #ef4444;
+  font-size: 10px;
+  text-shadow: 0 0 5px rgba(239,68,68,0.8);
+  margin-top: 4px;
+}
