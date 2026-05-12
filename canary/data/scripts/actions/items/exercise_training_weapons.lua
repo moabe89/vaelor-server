@@ -1,5 +1,11 @@
 local exhaustionTime = 10
 
+-- Sandbox FunnyOt: cada uso = 15 hits, gasta 15 cargas, ganha 15x skill/ml.
+-- Cargas iniciais sao triplicadas uma unica vez por arma (flag custom no item).
+local HITS_PER_USE = 15
+local CHARGE_MULTIPLIER = 3
+local CHARGE_MULT_FLAG = "SandboxChargeTripled"
+
 local exerciseWeaponsTable = {
 	-- MELE
 	[50292] = { skill = SKILL_FIST },
@@ -111,16 +117,19 @@ local function exerciseTrainingEvent(playerId, tilePosition, weaponId, dummyId)
 	local rate = dummies[dummyId] / 100
 	local isMagic = exerciseWeaponsTable[weaponId].skill == SKILL_MAGLEVEL
 	if isMagic then
-		player:addManaSpent(600 * rate)
+		player:addManaSpent(600 * rate * HITS_PER_USE)
 	else
-		player:addSkillTries(exerciseWeaponsTable[weaponId].skill, 7 * rate)
+		player:addSkillTries(exerciseWeaponsTable[weaponId].skill, 7 * rate * HITS_PER_USE)
 	end
 
-	weapon:setAttribute(ITEM_ATTRIBUTE_CHARGES, (weaponCharges - 1))
+	local chargesToConsume = math.min(weaponCharges, HITS_PER_USE)
+	weapon:setAttribute(ITEM_ATTRIBUTE_CHARGES, (weaponCharges - chargesToConsume))
 	tilePosition:sendMagicEffect(CONST_ME_HITAREA)
 
 	if exerciseWeaponsTable[weaponId].effect then
-		playerPosition:sendDistanceEffect(tilePosition, exerciseWeaponsTable[weaponId].effect)
+		for _ = 1, HITS_PER_USE do
+			playerPosition:sendDistanceEffect(tilePosition, exerciseWeaponsTable[weaponId].effect)
+		end
 	end
 
 	if weapon:getAttribute(ITEM_ATTRIBUTE_CHARGES) <= 0 then
@@ -200,6 +209,15 @@ function exerciseTraining.onUse(player, item, fromPosition, target, toPosition, 
 		if player:hasExhaustion("training-exhaustion") then
 			player:sendTextMessage(MESSAGE_FAILURE, "This exercise dummy can only be used after a " .. exhaustionTime .. " seconds cooldown.")
 			return true
+		end
+
+		-- Triplica cargas iniciais uma unica vez por arma (sandbox).
+		if not item:getCustomAttribute(CHARGE_MULT_FLAG) then
+			local currentCharges = item:getAttribute(ITEM_ATTRIBUTE_CHARGES) or 0
+			if currentCharges > 0 then
+				item:setAttribute(ITEM_ATTRIBUTE_CHARGES, currentCharges * CHARGE_MULTIPLIER)
+			end
+			item:setCustomAttribute(CHARGE_MULT_FLAG, 1)
 		end
 
 		_G.OnExerciseTraining[playerId] = {}
