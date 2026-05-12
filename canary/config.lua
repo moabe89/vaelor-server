@@ -510,7 +510,7 @@ rateUseStages = true
 lowLevelBonusExp = 50
 rateExp = 1
 rateSkill = 50
-rateLoot = 1
+rateLoot = 4
 rateMagic = 30
 rateSpawn = 1
 

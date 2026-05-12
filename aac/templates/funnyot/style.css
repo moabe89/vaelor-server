@@ -197,7 +197,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 30; /* acima do collapsible content (que e z-index 1) */
   transition: transform 0.7s;
 }
 .plaque.green .plaque-corner { background: var(--plaque-green); }
@@ -413,4 +413,131 @@ body {
   font-size: 10px;
   text-shadow: 0 0 5px rgba(239,68,68,0.8);
   margin-top: 4px;
+}
+
+/* =====================================================================
+   OVERRIDE PARA PAGINAS INTERNAS DO myAAC (Create Account, Lost, etc.)
+   O myAAC usa BGCOLOR inline com cores beges do tibia classico.
+   Aqui forcamos cores escuras do tema dentro do .funnyot-content.
+   ===================================================================== */
+.funnyot-content {
+  color: #e2e8f0;
+}
+
+/* Tabelas internas do myAAC: trocar fundo bege por tema dark */
+.funnyot-content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 12px;
+  background: transparent;
+}
+
+.funnyot-content table td,
+.funnyot-content table th {
+  background-color: rgba(20, 38, 66, 0.6) !important;
+  color: #e2e8f0 !important;
+  padding: 8px 12px;
+  border: 1px solid rgba(122, 92, 41, 0.4);
+}
+
+/* Header de tabela (geralmente vdarkborder) */
+.funnyot-content table td[bgcolor="#0d2e2b"],
+.funnyot-content table td.white {
+  background-color: rgba(13, 46, 43, 0.9) !important;
+  color: #fde68a !important;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Inputs do form */
+.funnyot-content input[type="text"],
+.funnyot-content input[type="password"],
+.funnyot-content input[type="email"],
+.funnyot-content input[type="number"],
+.funnyot-content select,
+.funnyot-content textarea {
+  background-color: rgba(7, 10, 16, 0.85);
+  color: #fde68a;
+  border: 1px solid #573e1c;
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.funnyot-content input[type="text"]:focus,
+.funnyot-content input[type="password"]:focus,
+.funnyot-content input[type="email"]:focus,
+.funnyot-content select:focus,
+.funnyot-content textarea:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+/* Botoes submit / forms */
+.funnyot-content input[type="submit"],
+.funnyot-content button[type="submit"],
+.funnyot-content button.btn,
+.funnyot-content .btn {
+  background: linear-gradient(180deg, #1f3a61 0%, #0a172b 100%);
+  border: 1px solid #d4af37;
+  border-radius: 4px;
+  color: #fdf3d7;
+  padding: 8px 24px;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 6px rgba(0,0,0,0.6);
+  transition: all 0.15s;
+}
+.funnyot-content input[type="submit"]:hover,
+.funnyot-content button[type="submit"]:hover,
+.funnyot-content button.btn:hover,
+.funnyot-content .btn:hover {
+  background: linear-gradient(180deg, #2a4c7a 0%, #0d1e38 100%);
+  border-color: #f0cc5e;
+  color: #ffffff;
+}
+
+/* Links */
+.funnyot-content a {
+  color: #fcd34d;
+  text-decoration: none;
+}
+.funnyot-content a:hover {
+  color: #fde68a;
+  text-decoration: underline;
+}
+
+/* Headings em paginas internas */
+.funnyot-content h1,
+.funnyot-content h2,
+.funnyot-content h3 {
+  color: #fde68a;
+  font-family: 'Cinzel', serif;
+}
+
+/* Paragrafos e textos genericos */
+.funnyot-content p,
+.funnyot-content label,
+.funnyot-content div {
+  color: inherit;
+}
+
+/* Listas */
+.funnyot-content ul,
+.funnyot-content ol {
+  color: #e2e8f0;
+}
+
+/* Cabecalho "Create FunnyOt Account" e similares (geralmente em B/STRONG dentro de TD) */
+.funnyot-content b,
+.funnyot-content strong {
+  color: #fde68a;
 }

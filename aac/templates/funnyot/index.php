@@ -225,10 +225,10 @@ $isOnline = isset($status['online']) && $status['online'];
 					<div class="collapsible-content collapsed" data-content="library">
 						<div class="collapsible-inner">
 							<div class="panel-body">
+								<a href="<?php echo getLink('serverinfo'); ?>" class="menu-link"><span class="marker"></span>Server Info</a>
 								<a href="<?php echo getLink('monsters'); ?>" class="menu-link"><span class="marker"></span>Monsters</a>
 								<a href="<?php echo getLink('spells'); ?>" class="menu-link"><span class="marker"></span>Spells</a>
 								<a href="<?php echo getLink('commands'); ?>" class="menu-link"><span class="marker"></span>Commands</a>
-								<a href="<?php echo getLink('exp-stages'); ?>" class="menu-link"><span class="marker"></span>Exp Stages</a>
 								<a href="<?php echo getLink('faq'); ?>" class="menu-link"><span class="marker"></span>FAQ</a>
 							</div>
 						</div>
