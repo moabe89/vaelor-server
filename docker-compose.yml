@@ -19,24 +19,26 @@ services:
       timeout: 5s
       retries: 10
 
-  aac:
-    build:
-      context: .
-      dockerfile: Dockerfile.aac
-    restart: unless-stopped
-    ports:
-      - "8081:80"
-    environment:
-      MYSQL_HOST: database
-      MYSQL_USER: ${MYSQL_USER:-canary}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?obrigatorio}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-canary}
-      SERVER_NAME: ${SERVER_NAME:-Vaelor}
-      SERVER_URL: http://31.97.151.29:8081/
-      SERVER_IP: ${SERVER_IP:-31.97.151.29}
-    depends_on:
-      database:
-        condition: service_healthy
+  # aac antigo desativado em 2026-05-12 — substituido pelo Easypanel (https://funnyotserv.com.br/)
+  # Para reativar como fallback emergencial, descomentar o bloco abaixo.
+  # aac:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.aac
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8081:80"
+  #   environment:
+  #     MYSQL_HOST: database
+  #     MYSQL_USER: ${MYSQL_USER:-canary}
+  #     MYSQL_PASSWORD: ${MYSQL_PASSWORD:?obrigatorio}
+  #     MYSQL_DATABASE: ${MYSQL_DATABASE:-canary}
+  #     SERVER_NAME: ${SERVER_NAME:-Vaelor}
+  #     SERVER_URL: http://31.97.151.29:8081/
+  #     SERVER_IP: ${SERVER_IP:-31.97.151.29}
+  #   depends_on:
+  #     database:
+  #       condition: service_healthy
 
   server:
     build:
