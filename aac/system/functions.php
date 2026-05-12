@@ -590,8 +590,9 @@ function template_footer(): string
 		$footer[] = '' . $settingFooter;
 	}
 
-	// please respect my work and help spreading the word, thanks!
-	$footer[] = base64_decode('UG93ZXJlZCBieSA8YSBocmVmPSJodHRwOi8vbXktYWFjLm9yZyIgdGFyZ2V0PSJfYmxhbmsiPk15QUFDLjwvYT4=');
+	// Credito ao MyAAC mantido em HTML comment no rodape (templates/tibiacom/index.php ja faz <!-- Powered by MyAAC -->)
+	// "Powered by MyAAC" visivel removido a pedido do FunnyOt para visual mais limpo.
+	// $footer[] = base64_decode('UG93ZXJlZCBieSA8YSBocmVmPSJodHRwOi8vbXktYWFjLm9yZyIgdGFyZ2V0PSJfYmxhbmsiPk15QUFDLjwvYT4=');
 
 	global $hooks;
 	$hooks->triggerFilter(HOOK_FILTER_THEME_FOOTER, $footer);
