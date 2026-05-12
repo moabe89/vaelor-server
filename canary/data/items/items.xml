@@ -8524,15 +8524,13 @@
 	</item>
 	<item id="3284" article="an" name="ice rapier">
 		<attribute key="primarytype" value="sword weapons"/>
-		<attribute key="description" value="A deadly but fragile weapon"/>
+		<attribute key="description" value="A deadly weapon (FunnyOt sandbox: nao quebra)"/>
 		<attribute key="weaponType" value="sword"/>
 		<attribute key="elementice" value="18"/>
-		<attribute key="charges" value="1"/>
 		<attribute key="attack" value="42"/>
 		<attribute key="defense" value="1"/>
 		<attribute key="weight" value="1500"/>
 		<attribute key="script" value="moveevent;weapon">
-			<attribute key="action" value="removecharge"/>
 			<attribute key="weaponType" value="sword"/>
 			<attribute key="slot" value="hand"/>
 		</attribute>
