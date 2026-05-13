@@ -34,6 +34,7 @@ function spell.onCastSpell(creature, var)
 		return false
 	end
 
+	var = SpellTargeting.redirectToTarget(creature, var)
 	return combat[grade]:execute(creature, var)
 end
 

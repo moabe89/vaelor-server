@@ -31,6 +31,7 @@ function spell.onCastSpell(creature, var)
 	if not creature or not player then
 		return false
 	end
+	var = SpellTargeting.redirectToTarget(creature, var)
 	return player:instantSkillWOD("Beam Mastery") and combatWOD:execute(creature, var) or combat:execute(creature, var)
 end
 

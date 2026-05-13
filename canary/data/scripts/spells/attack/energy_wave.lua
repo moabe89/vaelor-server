@@ -28,6 +28,7 @@ local combatWOD = createCombat(AREA_WAVE7, AREADIAGONAL_WAVE7, "onGetFormulaValu
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
+	var = SpellTargeting.redirectToTarget(creature, var)
 	local player = creature:getPlayer()
 	if creature and player then
 		if player:getWheelSpellAdditionalArea("Energy Wave") then

@@ -16,6 +16,7 @@ combat:setCallback(CALLBACK_PARAM_SKILLVALUE, "onGetFormulaValues")
 local spell = Spell("instant")
 
 function spell.onCastSpell(creature, var)
+	var = SpellTargeting.redirectToTarget(creature, var)
 	return combat:execute(creature, var)
 end
 
