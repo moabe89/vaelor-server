@@ -20,7 +20,17 @@ function createItem.onSay(player, words, param)
 	end
 
 	local charges = itemType:getCharges()
-	local count = tonumber(split[2] or 1)
+	-- Fix: se count NAO foi especificado e item tem charges, usar TODAS as charges
+	-- (evita criar item com 1 charge so quando padrao deveria ser charges cheias)
+	local rawCount = split[2]
+	local count
+	if rawCount then
+		count = tonumber(rawCount)
+	elseif charges > 0 and not itemType:isStackable() then
+		count = charges  -- usa max charges para items com charges
+	else
+		count = 1
+	end
 	if count then
 		if itemType:isStackable() then
 			local mainContainer = player:getSlotItem(CONST_SLOT_BACKPACK)
