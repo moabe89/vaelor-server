@@ -115,13 +115,18 @@ local function exerciseTrainingEvent(playerId, tilePosition, weaponId, dummyId)
 
 	local rate = dummies[dummyId] / 100
 	local isMagic = exerciseWeaponsTable[weaponId].skill == SKILL_MAGLEVEL
+
+	-- Sandbox FunnyOt: consome ate SKILL_MULTIPLIER charges por tick.
+	-- Se restam menos charges, consome o que tem e da skill proporcional.
+	local chargesToConsume = math.min(weaponCharges, SKILL_MULTIPLIER)
+
 	if isMagic then
-		player:addManaSpent(600 * rate * SKILL_MULTIPLIER)
+		player:addManaSpent(600 * rate * chargesToConsume)
 	else
-		player:addSkillTries(exerciseWeaponsTable[weaponId].skill, 7 * rate * SKILL_MULTIPLIER)
+		player:addSkillTries(exerciseWeaponsTable[weaponId].skill, 7 * rate * chargesToConsume)
 	end
 
-	weapon:setAttribute(ITEM_ATTRIBUTE_CHARGES, (weaponCharges - 1))
+	weapon:setAttribute(ITEM_ATTRIBUTE_CHARGES, (weaponCharges - chargesToConsume))
 	tilePosition:sendMagicEffect(CONST_ME_HITAREA)
 
 	if exerciseWeaponsTable[weaponId].effect then
