@@ -1,13 +1,9 @@
 local exhaustionTime = 10
 
--- Sandbox FunnyOt: hiper fast attack na exercise weapon.
--- - Cada tick: consome 15 charges, da skill equivalente a 30 hits (x30)
--- - Tick a cada 0.5s (em vez do default ~1.2s)
--- - Arma com 14400 charges dura ~8min (vs 19min anterior)
--- - Skill/min ~25.000 (vs 5.250 anterior, vs 350 do Tibia original)
-local SKILL_MULTIPLIER = 30
+-- Sandbox FunnyOt: cada tick consome 15 charges, da skill x15.
+-- Mantem o tick com base no attackspeed da vocacao (ja reduzido pra 1200ms).
+local SKILL_MULTIPLIER = 15
 local CHARGES_PER_TICK = 15
-local TICK_MS = 500
 
 local exerciseWeaponsTable = {
 	-- MELE
@@ -156,8 +152,8 @@ local function exerciseTrainingEvent(playerId, tilePosition, weaponId, dummyId)
 		logger.debug("Fast exercise is enabled.")
 	end
 
-	-- Sandbox FunnyOt: tick fixo em TICK_MS (hiper fast attack)
-	_G.OnExerciseTraining[playerId].event = addEvent(exerciseTrainingEvent, TICK_MS * eventSpeedMultiplier, playerId, tilePosition, weaponId, dummyId)
+	local vocation = player:getVocation()
+	_G.OnExerciseTraining[playerId].event = addEvent(exerciseTrainingEvent, (vocation:getBaseAttackSpeed() / configManager.getFloat(configKeys.RATE_EXERCISE_TRAINING_SPEED)) * eventSpeedMultiplier, playerId, tilePosition, weaponId, dummyId)
 	return true
 end
 

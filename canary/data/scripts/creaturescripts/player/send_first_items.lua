@@ -21,6 +21,9 @@ local config = {
 			{ 3003, 1 }, -- rope
 			{ 5710, 1 }, -- light shovel
 			{ 268, 10 }, -- mana potion
+			-- FunnyOt sandbox: exercise weapons iniciais
+			{ 35290, 1 }, -- lasting exercise wand
+			{ 44067, 1 }, -- lasting exercise shield
 		},
 	},
 
@@ -39,6 +42,9 @@ local config = {
 			{ 3003, 1 }, -- rope
 			{ 5710, 1 }, -- light shovel
 			{ 268, 10 }, -- mana potion
+			-- FunnyOt sandbox: exercise weapons iniciais
+			{ 35290, 1 }, -- lasting exercise wand
+			{ 44067, 1 }, -- lasting exercise shield
 		},
 	},
 
@@ -59,6 +65,10 @@ local config = {
 			{ 266, 10 }, -- health potion
 			{ 3350, 1 }, -- bow
 			{ 3447, 50 }, -- 50 arrows
+			-- FunnyOt sandbox: exercise weapons iniciais
+			{ 35284, 1 }, -- durable exercise wand
+			{ 44067, 1 }, -- lasting exercise shield
+			{ 35288, 1 }, -- lasting exercise bow
 		},
 	},
 
@@ -79,6 +89,12 @@ local config = {
 			{ 3003, 1 }, -- rope
 			{ 5710, 1 }, -- light shovel
 			{ 266, 10 }, -- health potion
+			-- FunnyOt sandbox: exercise weapons iniciais
+			{ 44067, 1 }, -- lasting exercise shield
+			{ 35287, 1 }, -- lasting exercise club
+			{ 35286, 1 }, -- lasting exercise axe
+			{ 35285, 1 }, -- lasting exercise sword
+			{ 35284, 1 }, -- durable exercise wand
 		},
 	},
 
@@ -97,6 +113,10 @@ local config = {
 			{ 3003, 1 }, -- rope
 			{ 5710, 1 }, -- light shovel
 			{ 266, 10 }, -- health potion
+			-- FunnyOt sandbox: exercise weapons iniciais
+			{ 50295, 1 }, -- lasting exercise wraps
+			{ 44067, 1 }, -- lasting exercise shield
+			{ 35284, 1 }, -- durable exercise wand
 		},
 	},
 }
