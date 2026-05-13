@@ -139,6 +139,7 @@ body {
   border: none;
   padding: 0;
   outline: none;
+  z-index: 25; /* acima do collapsible-content para que os corners (bl/br) que saem por baixo do plaque nao sejam cobertos */
 }
 .plaque:hover {
   transform: scale(1.01);
@@ -451,30 +452,43 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* Inputs do form */
+/* Inputs do form (forca com !important porque Tailwind preflight e browser
+   default tem regras concorrentes) */
 .funnyot-content input[type="text"],
 .funnyot-content input[type="password"],
 .funnyot-content input[type="email"],
 .funnyot-content input[type="number"],
+.funnyot-content input:not([type]),
 .funnyot-content select,
 .funnyot-content textarea {
-  background-color: rgba(7, 10, 16, 0.85);
-  color: #fde68a;
-  border: 1px solid #573e1c;
-  border-radius: 3px;
-  padding: 6px 10px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  outline: none;
+  background-color: rgba(7, 10, 16, 0.85) !important;
+  background-image: none !important;
+  color: #fde68a !important;
+  border: 1px solid #573e1c !important;
+  border-radius: 3px !important;
+  padding: 6px 10px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  outline: none !important;
+  -webkit-text-fill-color: #fde68a !important; /* Chrome autofill override */
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 .funnyot-content input[type="text"]:focus,
 .funnyot-content input[type="password"]:focus,
 .funnyot-content input[type="email"]:focus,
+.funnyot-content input:not([type]):focus,
 .funnyot-content select:focus,
 .funnyot-content textarea:focus {
-  border-color: #d4af37;
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+  border-color: #d4af37 !important;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3) !important;
+}
+/* Override autofill amarelo do Chrome */
+.funnyot-content input:-webkit-autofill,
+.funnyot-content input:-webkit-autofill:hover,
+.funnyot-content input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px rgba(7, 10, 16, 0.95) inset !important;
+  -webkit-text-fill-color: #fde68a !important;
+  caret-color: #fde68a !important;
 }
 
 /* Botoes submit / forms */
@@ -540,4 +554,106 @@ body {
 .funnyot-content b,
 .funnyot-content strong {
   color: #fde68a;
+}
+
+/* =====================================================================
+   FIX: Sidebar vertical menu (account/manage)
+   ===================================================================== */
+.funnyot-content .vertical-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: rgba(11, 17, 26, 0.6);
+  border: 1px solid #573e1c;
+  border-radius: 4px;
+}
+.funnyot-content .vertical-menu a {
+  display: block;
+  padding: 8px 12px;
+  color: #fde68a !important;
+  background: rgba(20, 38, 66, 0.6);
+  border: 1px solid #573e1c;
+  border-radius: 3px;
+  text-decoration: none !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.funnyot-content .vertical-menu a:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transform: translateX(2px);
+}
+
+/* =====================================================================
+   FIX: Mensagens .warning/.error/.success/.note - cores legiveis no tema dark
+   (override do messages.css padrao myAAC que usa cores claras)
+   ===================================================================== */
+.funnyot-content .warning,
+.funnyot-content .error,
+.funnyot-content .success,
+.funnyot-content .note,
+.warning, .error, .success, .note {
+  padding: 10px 14px !important;
+  border-radius: 4px !important;
+  border-width: 1px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  background-image: none !important;
+  margin: 8px 0 !important;
+}
+.funnyot-content .warning, .warning {
+  background-color: rgba(140, 100, 30, 0.25) !important;
+  border-color: #d4af37 !important;
+  color: #fde68a !important;
+}
+.funnyot-content .error, .error {
+  background-color: rgba(180, 30, 30, 0.25) !important;
+  border-color: #ef4444 !important;
+  color: #fca5a5 !important;
+}
+.funnyot-content .success, .success {
+  background-color: rgba(30, 130, 40, 0.25) !important;
+  border-color: #22c55e !important;
+  color: #86efac !important;
+}
+.funnyot-content .note, .note {
+  background-color: rgba(30, 80, 140, 0.25) !important;
+  border-color: #3b82f6 !important;
+  color: #93c5fd !important;
+}
+
+/* =====================================================================
+   FIX: Tabelas grandes (character list, etc.) - overflow-x scroll
+   ===================================================================== */
+.funnyot-content {
+  overflow-x: auto;
+  max-width: 100%;
+}
+.funnyot-content table {
+  table-layout: auto;
+  max-width: 100%;
+}
+.funnyot-content table th,
+.funnyot-content table td {
+  white-space: nowrap;
+  font-size: 12px !important;
+  padding: 6px 10px !important;
+}
+.funnyot-content table th {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: #fde68a !important;
+}
+
+/* Quando tabela tiver muitas colunas (8+), reduzir mais */
+.funnyot-content table th[colspan],
+.funnyot-content table[summary*="character"] th,
+.funnyot-content table[summary*="character"] td {
+  font-size: 11px !important;
+  padding: 4px 8px !important;
 }
