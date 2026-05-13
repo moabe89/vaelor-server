@@ -296,6 +296,7 @@ toggleReceiveReward = false
 randomMonsterSpawn = false
 lootPouchMaxLimit = 2000
 quickLootMaxCorpses = 30
+autoLoot = true
 storeInboxMaxLimit = 2000
 enablePlayerPutItemInAmmoSlot = false
 startStreakLevel = 0

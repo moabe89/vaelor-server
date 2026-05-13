@@ -101,7 +101,7 @@ spell:isPremium(true)
 spell:range(7)
 spell:needTarget(true)
 spell:blockWalls(true)
-spell:cooldown(1000) -- Cooldown is calculated on the casting
+spell:cooldown(800) -- Cooldown is calculated on the casting
 spell:groupCooldown(2 * 1000)
 spell:needLearn(true)
 spell:vocation("paladin;true", "royal paladin;true")

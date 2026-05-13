@@ -32,7 +32,7 @@ spell:words("uteta res sac")
 spell:level(300)
 spell:mana(1500)
 spell:isPremium(true)
-spell:cooldown(2 * 60 * 60 * 1000) -- Default cooldown = 2 hours
+spell:cooldown(5760 * 1000) -- Default cooldown = 2 hours
 spell:groupCooldown(2 * 1000)
 spell:vocation("paladin;true", "royal paladin;true")
 spell:hasParams(true)
