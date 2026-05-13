@@ -1,9 +1,13 @@
 local exhaustionTime = 10
 
--- Sandbox FunnyOt: cada hit da 15x mais skill/ml e 15 efeitos visuais.
--- Charges sao consumidas 1 por tick (igual ao Tibia original), mas o
--- ganho de skill ao longo de N charges equivale a 15*N hits comuns.
-local SKILL_MULTIPLIER = 15
+-- Sandbox FunnyOt: hiper fast attack na exercise weapon.
+-- - Cada tick: consome 15 charges, da skill equivalente a 30 hits (x30)
+-- - Tick a cada 0.5s (em vez do default ~1.2s)
+-- - Arma com 14400 charges dura ~8min (vs 19min anterior)
+-- - Skill/min ~25.000 (vs 5.250 anterior, vs 350 do Tibia original)
+local SKILL_MULTIPLIER = 30
+local CHARGES_PER_TICK = 15
+local TICK_MS = 500
 
 local exerciseWeaponsTable = {
 	-- MELE
@@ -116,14 +120,17 @@ local function exerciseTrainingEvent(playerId, tilePosition, weaponId, dummyId)
 	local rate = dummies[dummyId] / 100
 	local isMagic = exerciseWeaponsTable[weaponId].skill == SKILL_MAGLEVEL
 
-	-- Sandbox FunnyOt: consome ate SKILL_MULTIPLIER charges por tick.
-	-- Se restam menos charges, consome o que tem e da skill proporcional.
-	local chargesToConsume = math.min(weaponCharges, SKILL_MULTIPLIER)
+	-- Sandbox FunnyOt: consome ate CHARGES_PER_TICK charges, da skill
+	-- proporcional a SKILL_MULTIPLIER (independente das charges consumidas).
+	-- Se restam menos charges que CHARGES_PER_TICK, consome o que tem.
+	local chargesToConsume = math.min(weaponCharges, CHARGES_PER_TICK)
+	local skillTriesPerHit = 7
+	local skillTries = skillTriesPerHit * rate * SKILL_MULTIPLIER
 
 	if isMagic then
-		player:addManaSpent(600 * rate * chargesToConsume)
+		player:addManaSpent(600 * rate * SKILL_MULTIPLIER)
 	else
-		player:addSkillTries(exerciseWeaponsTable[weaponId].skill, 7 * rate * chargesToConsume)
+		player:addSkillTries(exerciseWeaponsTable[weaponId].skill, skillTries)
 	end
 
 	weapon:setAttribute(ITEM_ATTRIBUTE_CHARGES, (weaponCharges - chargesToConsume))
@@ -149,8 +156,8 @@ local function exerciseTrainingEvent(playerId, tilePosition, weaponId, dummyId)
 		logger.debug("Fast exercise is enabled.")
 	end
 
-	local vocation = player:getVocation()
-	_G.OnExerciseTraining[playerId].event = addEvent(exerciseTrainingEvent, (vocation:getBaseAttackSpeed() / configManager.getFloat(configKeys.RATE_EXERCISE_TRAINING_SPEED)) * eventSpeedMultiplier, playerId, tilePosition, weaponId, dummyId)
+	-- Sandbox FunnyOt: tick fixo em TICK_MS (hiper fast attack)
+	_G.OnExerciseTraining[playerId].event = addEvent(exerciseTrainingEvent, TICK_MS * eventSpeedMultiplier, playerId, tilePosition, weaponId, dummyId)
 	return true
 end
 
