@@ -32,7 +32,7 @@ spell:words("uteta res eq")
 spell:level(300)
 spell:mana(800)
 spell:isPremium(true)
-spell:cooldown(5760 * 1000) -- Default cooldown = 2 hours
+spell:cooldown(4320 * 1000) -- Default cooldown = 2 hours
 spell:groupCooldown(2 * 1000)
 spell:vocation("knight;true", "elite knight;true")
 spell:hasParams(true)

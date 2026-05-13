@@ -32,7 +32,7 @@ spell:words("uteta res dru")
 spell:level(300)
 spell:mana(2200)
 spell:isPremium(true)
-spell:cooldown(5760 * 1000) -- Default cooldown = 2 hours
+spell:cooldown(4320 * 1000) -- Default cooldown = 2 hours
 spell:groupCooldown(2 * 1000)
 spell:vocation("druid;true", "elder druid;true")
 spell:hasParams(true)
