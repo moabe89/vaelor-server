@@ -283,7 +283,7 @@ onlyPremiumAccount = false
 -- NOTE: minTownIdToBankTransferFromMain blocks towns less than defined from receiving money transfers
 -- NOTE: enableSupportOutfit enable GODS and GMS to select support outfit (gamemaster, customer support or community manager)
 depotChest = 4
-autoLoot = false
+autoLoot = true
 autoBank = false
 toggleGoldPouchAllowAnything = false
 toggleGoldPouchQuickLootOnly = false
@@ -296,7 +296,6 @@ toggleReceiveReward = false
 randomMonsterSpawn = false
 lootPouchMaxLimit = 2000
 quickLootMaxCorpses = 30
-autoLoot = true
 storeInboxMaxLimit = 2000
 enablePlayerPutItemInAmmoSlot = false
 startStreakLevel = 0

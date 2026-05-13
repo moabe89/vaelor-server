@@ -138,16 +138,19 @@ blessingsCmd:register()
 local preyslotCmd = TalkAction("!preyslot")
 
 function preyslotCmd.onSay(player, words, param)
-	-- Adicionar 3o prey slot (PreySlot_Three = enum no canary)
-	pcall(function() player:reloadPreySlot(PreySlot_Three) end)
+	-- Desbloquear 3o prey slot permanente (Tibia Store equivalente)
+	pcall(function() player:preyThirdSlot(true) end)
+
+	-- Desbloquear 3o task hunting slot
+	pcall(function() player:taskHuntingThirdSlot(true) end)
 
 	-- Adicionar 50 prey wildcards (servem pra rerollar bonus / lockar prey)
 	pcall(function() player:addPreyCards(50) end)
 
-	-- Hunting task 3o slot
-	pcall(function() player:reloadTaskSlot(PreySlot_Three) end)
-
-	player:sendTextMessage(MESSAGE_EVENT_ADVANCE, "Voce ganhou 3o prey slot + 50 wildcards + 3o hunting task slot.")
+	player:sendTextMessage(MESSAGE_EVENT_ADVANCE,
+		"Voce desbloqueou o 3o prey slot permanente + 3o hunting task slot + 50 prey wildcards. " ..
+		"Reabra o painel Prey (botao no canto direito) para ver os slots desbloqueados."
+	)
 	return false
 end
 
